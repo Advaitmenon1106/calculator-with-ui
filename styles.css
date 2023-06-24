@@ -1,0 +1,39 @@
+.outerBox{
+    height: fit-content;
+    width: 300px;
+    background-color: black;
+    margin-left: 40%;
+    border-radius: 10px;
+    margin-top: 10%;
+}
+
+.key-row{
+    display: flex;
+    align-content: space-around;
+}
+
+.keyStandard, .operator, .decimal, .clearAll{
+    height: 60px;
+    width: 60px;
+    background-color: #222222;
+    flex: 1;
+    border-radius: 10px;
+    margin: 1%;
+    color: aliceblue;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#displayPane{
+    width: 300px;
+    height: 80px;
+    text-align: right;
+    padding-top: 30px;
+    padding-right: 20px;
+    font-size: 60px;
+}
+
+.keyStandard, .operator, .decimal, .clearAll:hover{
+    cursor: pointer;
+}
