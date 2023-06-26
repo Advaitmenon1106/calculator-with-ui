@@ -1,6 +1,6 @@
 .outerBox{
     height: fit-content;
-    width: 300px;
+    width: 350px;
     background-color: black;
     margin-left: 40%;
     border-radius: 10px;
@@ -12,7 +12,7 @@
     align-content: space-around;
 }
 
-.keyStandard, .operator, .decimal, .clearAll{
+.keyStandard, .operator, .decimal, .clearAll, .bracket, .equals{
     height: 60px;
     width: 60px;
     background-color: #222222;
@@ -26,14 +26,25 @@
 }
 
 #displayPane{
-    width: 300px;
-    height: 80px;
+    height: 100px;
     text-align: right;
     padding-top: 30px;
     padding-right: 20px;
     font-size: 60px;
+    overflow-x: scroll;
+    /*margin-right: 0px;*/
+    
 }
 
-.keyStandard, .operator, .decimal, .clearAll:hover{
+.keyStandard, .operator, .decimal, .clearAll:hover, .bracket, .equals{
     cursor: pointer;
+}
+
+#operatorSymbol{
+    color: aliceblue;
+    /*border: 2px red solid;*/
+    font-size: 30px;
+    text-align: left;
+    padding-left: 10px;
+
 }
