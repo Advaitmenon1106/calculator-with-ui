@@ -1,4 +1,7 @@
 function appendIntegers(event){
+    if (parseInt(display.innerHTML) == 0){
+        display.innerHTML = '';
+    }
     display.innerHTML+=event.target.innerHTML;
 }
 
@@ -11,7 +14,9 @@ function parser(a, b, oper){
         case '×':
             return a*b;
         case '/':
-            return a/b
+            return a/b;
+        case '%':
+            return (a/100)*b;
     
         default:
             break;
@@ -19,15 +24,16 @@ function parser(a, b, oper){
 }
 
 function pushOperator(event){
-    if (typeof operationStack[operationStack.length-1] == 'string' || (operationStack.length == 0 && display.innerHTML.length == 0)){
+    /*if (typeof operationStack[operationStack.length-1] == 'string' || 
+    (operationStack.length == 0 && display.innerHTML.length == 0) || (display.innerHTML == 0)){
         return;
     }
-    else{
+    else{*/
         operationStack.push(parseFloat(display.innerHTML));
         operationStack.push(event.target.innerHTML);
         operatorSymbol.innerHTML = event.target.innerHTML;
-        display.innerHTML = '';     
-    }
+        display.innerHTML = 0;     
+    //}
 }
 
 let display = document.querySelector('#displayPane');
@@ -47,7 +53,7 @@ for (i = 0; i<10; i++){
 }
 
 document.querySelector('#allClear').addEventListener('click', ()=>{
-    display.innerHTML = '';
+    display.innerHTML = 0;
     operationStack.length = 0;
     operatorSymbol.innerHTML = '';
 })
@@ -58,15 +64,34 @@ for (i = 0; i<operators.length; i++){
 }
 
 equals[0].addEventListener('click', ()=>{
+    counter = 0;
     operationStack.push(parseFloat(display.innerHTML));
-    for (i = 0; i<operationStack.length; i+=2){
-        if (i+2>= operationStack.length){
-            break
-        }
-        else{
-            result1 = parser(operationStack[i], operationStack[i+2], operationStack[i+1])
-            operationStack.length = 0;
+    operatorSymbol.innerHTML = '';
+
+    for (i = 0; i<operationStack.length; i++){
+        if (typeof operationStack[i] == 'string'){
+            counter = counter+1;
         }
     }
-    display.innerHTML = result1;
+
+    while (counter!=0){
+        for (i = 0; i<operationStack.length; i++){
+            if (typeof operationStack[i] == 'string'){
+                if (operationStack[i+1] == 0 && operationStack[i] == '/'){
+                    display.style.fontSize = '30px';
+                    display.innerHTML = 'We don\'t do that here.';
+                    return;
+                }
+                else{
+                    let result = parser(operationStack[i-1], operationStack[i+1], operationStack[i]);
+                    operationStack.splice(i-1, i+2);
+                    operationStack.unshift(result);
+                break;
+                }
+            }
+        }
+        counter = counter-1;
+    }
+    display.innerHTML = operationStack[0];
+    operationStack.length = 0;
 })
