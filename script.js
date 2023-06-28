@@ -1,8 +1,15 @@
 function appendIntegers(event){
-    if (parseInt(display.innerHTML) == 0){
-        display.innerHTML = '';
+    if (display.innerHTML == '0.'){
+        display.innerHTML+=event.target.innerHTML;
     }
-    display.innerHTML+=event.target.innerHTML;
+
+    else if (parseFloat(display.innerHTML) == 0){
+        display.innerHTML = '';
+        display.innerHTML+=event.target.innerHTML;
+    }
+    else{
+        display.innerHTML+=event.target.innerHTML;
+    }
 }
 
 function parser(a, b, oper){
@@ -24,16 +31,10 @@ function parser(a, b, oper){
 }
 
 function pushOperator(event){
-    /*if (typeof operationStack[operationStack.length-1] == 'string' || 
-    (operationStack.length == 0 && display.innerHTML.length == 0) || (display.innerHTML == 0)){
-        return;
-    }
-    else{*/
         operationStack.push(parseFloat(display.innerHTML));
         operationStack.push(event.target.innerHTML);
         operatorSymbol.innerHTML = event.target.innerHTML;
         display.innerHTML = 0;     
-    //}
 }
 
 let display = document.querySelector('#displayPane');
@@ -92,6 +93,10 @@ equals[0].addEventListener('click', ()=>{
         }
         counter = counter-1;
     }
-    display.innerHTML = operationStack[0];
+    display.innerHTML = operationStack[0].toFixed(3);
     operationStack.length = 0;
+})
+
+document.getElementsByClassName('decimal')[0].addEventListener('click', ()=>{
+    display.innerHTML+='.';
 })
