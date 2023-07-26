@@ -5,6 +5,8 @@
     margin-left: 40%;
     border-radius: 10px;
     margin-top: 10%;
+    padding: 5px;
+    box-shadow: 2px 2px 2px 2px rgb(33, 33, 33);
 }
 
 .key-row{
@@ -36,8 +38,13 @@
     
 }
 
-.keyStandard, .operator, .decimal, .clearAll:hover, .bracket, .equals{
+.keyStandard, .operator, .decimal, .clearAll, .bracket, .equals{
     cursor: pointer;
+    box-shadow: 3px 3px;
+}
+
+.equals{
+    box-shadow: 3px 3px rgb(130, 204, 20);
 }
 
 #operatorSymbol{
